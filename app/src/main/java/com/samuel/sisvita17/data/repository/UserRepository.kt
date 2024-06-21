@@ -1,6 +1,6 @@
 package com.samuel.sisvita17.data.repository
 
-import com.samuel.sisvita17.data.model.User
+import com.samuel.sisvita17.model.User
 class UserRepository {
 
     private val dummyUser = User(username = "test", password = "1234")
@@ -9,3 +9,4 @@ class UserRepository {
         return username == dummyUser.username && password == dummyUser.password
     }
 }
+
