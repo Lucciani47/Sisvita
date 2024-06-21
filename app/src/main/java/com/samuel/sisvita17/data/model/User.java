@@ -13,5 +13,4 @@ public class User {
     private boolean is_active;
     private String date_joined;
     public String rol;
-    // getters and setters
 }

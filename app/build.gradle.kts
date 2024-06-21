@@ -100,6 +100,8 @@ dependencies {
 
     implementation ("com.squareup.okhttp3:okhttp:4.9.0")
     implementation ("org.json:json:20210307")
+    implementation ("androidx.navigation:navigation-compose:2.4.0-alpha10")
+
 
     implementation ("com.google.code.gson:gson:2.8.8")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")

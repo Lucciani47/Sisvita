@@ -8,31 +8,31 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.samuel.sisvita17.ui.theme.Sisvita17Theme
-//import com.samuel.sisvita17.network.getResponse
-
-import com.samuel.sisvita17.ui.view.LoginScreen
-import com.samuel.sisvita17.ui.view.user.Menu
+import com.samuel.sisvita17.ui.view.LogInScreen
+import com.samuel.sisvita17.ui.view.user.DoTestScreen
 import com.samuel.sisvita17.ui.view.user.SignUpScreen
+import com.samuel.sisvita17.ui.view.user.UserMenuScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Sisvita17Theme {
-                LoginScreen(navController = rememberNavController())
-                SisvitaApp()
+                LogInScreen(navController = rememberNavController())
+                Sisvita171()
             }
         }
     }
 }
 
 @Composable
-fun SisvitaApp(){
+fun Sisvita171() {
     val navController = rememberNavController()
     //getResponse()
     NavHost(navController = navController, startDestination = "login") {
-        composable("login") { LoginScreen(navController) }
-        composable("menu") { Menu(navController) }
+        composable("LogIn") { LogInScreen(navController) }
+        composable("Menu") { UserMenuScreen(navController) }
         composable("SignUp") { SignUpScreen(navController) }
+        composable("DoTest") { DoTestScreen(navController) }
     }
 }

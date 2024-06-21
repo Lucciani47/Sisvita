@@ -18,7 +18,7 @@ import com.samuel.sisvita17.ui.theme.BackgroundColor
 import com.samuel.sisvita17.services.getJwt
 
 @Composable
-fun LoginScreen(navController: NavController) {
+fun LogInScreen(navController: NavController) {
     var userInput by remember { mutableStateOf("") }
     var passwordInput by remember { mutableStateOf("") }
 
@@ -58,18 +58,16 @@ fun LoginScreen(navController: NavController) {
         }
         Spacer(modifier = Modifier.height(8.dp))
         Button(
-            onClick = {
-                navController.navigate("SignUp")
-            },
+            onClick = { navController.navigate("SignUp") },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Crear cuenta")
+            Text("Registrarse")
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun LoginScreenPreview() {
-    LoginScreen(navController = rememberNavController())
+fun LogInScreenPreview() {
+    LogInScreen(navController = rememberNavController())
 }

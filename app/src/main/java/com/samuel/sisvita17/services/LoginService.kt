@@ -1,28 +1,13 @@
 package com.samuel.sisvita17.services
 
 import android.util.Log
-import android.widget.Toast
 import androidx.navigation.NavController
 import com.samuel.sisvita17.data.model.User
-import com.samuel.sisvita17.data.request.LoginRequest
-import com.samuel.sisvita17.data.response.LoginResponse
 import com.samuel.sisvita17.network.ApiClient
 import com.samuel.sisvita17.network.ApiService
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-/*
-interface LoginService {
-    @POST("usuarios/")
-    suspend fun login(@Body loginRequest: LoginRequest): Response<LoginResponse>
-}*/
 
 fun getJwt(username: String, password: String, navController: NavController) {
     val apiService = ApiClient.getRetrofitInstance().create(ApiService::class.java)
@@ -44,8 +29,13 @@ fun getJwt(username: String, password: String, navController: NavController) {
                     }
 
                     if (loginSuccess) {
-                        navController.navigate("menu")
+                        navController.navigate("Menu"){
+                            popUpTo(navController.graph.startDestinationId) {
+                                inclusive = true
+                            }
+                        }
                         /*Toast.makeText("Main Activity", "Logeado satisfactoriamente", Toast.LENGTH_SHORT).show()*/
+                        Log.e("MainActivity", "Logeado Satisfactoriamente")
                         /*when (userRole) {
                             "alumno" -> {
                                 val intent = Intent(this@MainActivity, InicioUser::class.java)
