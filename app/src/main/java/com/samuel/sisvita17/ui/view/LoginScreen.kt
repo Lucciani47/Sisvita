@@ -11,16 +11,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.samuel.sisvita17.R
 import com.samuel.sisvita17.ui.theme.BackgroundColor
-import com.samuel.sisvita17.ui.viewmodel.LoginViewModel
+import com.samuel.sisvita17.services.getJwt
 
 @Composable
-fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
-    var username by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    val loginState by viewModel.loginState.collectAsState()
+fun LoginScreen(navController: NavController) {
+    var userInput by remember { mutableStateOf("") }
+    var passwordInput by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -36,22 +36,22 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         TextField(
-            value = username,
-            onValueChange = { username = it },
+            value = userInput,
+            onValueChange = { userInput = it },
             label = { Text("Usuario") },
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
-            value = password,
-            onValueChange = { password = it },
+            value = passwordInput,
+            onValueChange = { passwordInput = it },
             label = { Text("Contraseña") },
             modifier = Modifier.fillMaxWidth(),
             visualTransformation = PasswordVisualTransformation()
         )
         Spacer(modifier = Modifier.height(16.dp))
         Button(
-            onClick = { viewModel.login(username, password) },
+            onClick = { getJwt(userInput, passwordInput, navController) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Ingresar")
@@ -59,8 +59,8 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
         Spacer(modifier = Modifier.height(8.dp))
         Button(
             onClick = {
-                //navController.navigate("SignUpScreen")
-                },
+                navController.navigate("SignUp")
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Crear cuenta")
@@ -71,5 +71,5 @@ fun LoginScreen(viewModel: LoginViewModel = viewModel()) {
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(navController = rememberNavController())
 }

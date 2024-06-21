@@ -4,16 +4,14 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-
-val BASE_URL = "https://backend-zlo2.onrender.com/api/v1/";
-
+/*
 fun getRetrofit(): Retrofit {
     val client = OkHttpClient.Builder().build()
     return Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl("hhttps://backend-zlo2.onrender.com/api/v1/")
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .build()
 }
-
+*/

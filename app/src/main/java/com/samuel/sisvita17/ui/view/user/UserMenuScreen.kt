@@ -1,4 +1,4 @@
-package com.samuel.sisvita17.ui.view
+package com.samuel.sisvita17.ui.view.user
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
