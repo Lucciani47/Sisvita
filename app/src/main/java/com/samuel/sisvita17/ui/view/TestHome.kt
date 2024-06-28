@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -41,6 +42,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -48,6 +50,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.example.sisvita_android.utils.DateUtils
+import com.samuel.sisvita17.R
 import com.samuel.sisvita17.data.model.TestListData
 import com.samuel.sisvita17.ui.viewmodel.TestHomeViewModel
 
@@ -58,50 +61,30 @@ import com.samuel.sisvita17.ui.viewmodel.TestHomeViewModel
 fun TestHome(navController: NavController, testHomeViewModel: TestHomeViewModel = viewModel()) {
     val testResult by testHomeViewModel.testResult.observeAsState()
     testHomeViewModel.getTests()
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "TESTS",
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor =
-                    MaterialTheme.colorScheme.primary
-                )
-            )
-        }
+    LazyColumn(
+        //contentPadding = it
+        modifier = Modifier.background(color = colorResource(id = R.color.background))
     ) {
-
-        Spacer(modifier = Modifier.height(100.dp))
-        LazyColumn(
-            contentPadding = it
-        ) {
-            testResult?.let { it1 ->
-                items(it1.data) {
-                    TestItem(
-                        test = it,
-                        modifier = Modifier.padding(16.dp),
-                        navController = navController
-                    )
-                }
+        testResult?.let { it1 ->
+            items(it1.data) {
+                TestItem(
+                    test = it,
+                    modifier = Modifier.padding(16.dp),
+                    navController = navController
+                )
             }
         }
-        if (testResult == null) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(text = "No hay test")
-            }
+    }
+    if (testResult == null) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = colorResource(id = R.color.background))
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "No hay test")
         }
     }
 }
