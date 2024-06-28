@@ -32,6 +32,6 @@ interface ApiService {
     fun getTestById(@Path("testId") testId: Int): Call<TestAllResponse>
     @GET("usuarios/{usuario_id}")
     fun getUsuario(@Path("usuario_id") usuario_id:Int): Call<UsuarioResponse>
-    @POST("test/responder")
+    @POST("PruebaEvaluacion/responder")
     fun setRespuestaTest(@Body testRequest: TestRequest): Call<TestResponse>
 }

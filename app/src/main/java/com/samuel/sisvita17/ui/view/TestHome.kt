@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,8 +16,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
@@ -24,12 +28,19 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -43,7 +54,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,6 +67,8 @@ import androidx.navigation.NavController
 import com.example.sisvita_android.utils.DateUtils
 import com.samuel.sisvita17.R
 import com.samuel.sisvita17.data.model.TestListData
+import com.samuel.sisvita17.data.model.TituloData
+import com.samuel.sisvita17.navigation.AppScreen
 import com.samuel.sisvita17.ui.viewmodel.TestHomeViewModel
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -61,32 +78,47 @@ import com.samuel.sisvita17.ui.viewmodel.TestHomeViewModel
 fun TestHome(navController: NavController, testHomeViewModel: TestHomeViewModel = viewModel()) {
     val testResult by testHomeViewModel.testResult.observeAsState()
     testHomeViewModel.getTests()
-    LazyColumn(
-        //contentPadding = it
-        modifier = Modifier.background(color = colorResource(id = R.color.background))
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = colorResource(id = R.color.background))
+            .padding(16.dp)
     ) {
-        testResult?.let { it1 ->
-            items(it1.data) {
-                TestItem(
-                    test = it,
-                    modifier = Modifier.padding(16.dp),
-                    navController = navController
-                )
+        Image(
+            painter = painterResource(id = R.mipmap.logo_sisvita),
+            contentDescription = "Logo",
+            modifier = Modifier.size(256.dp)
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        LazyColumn(
+            //contentPadding = it
+            modifier = Modifier.background(color = colorResource(id = R.color.background))
+        ) {
+            testResult?.let { it1 ->
+                items(it1.data) {
+                    TestItem(
+                        test = it,
+                        modifier = Modifier.padding(16.dp),
+                        navController = navController
+                    )
+                }
+            }
+        }
+        if (testResult == null) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = colorResource(id = R.color.background))
+                    .padding(16.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "No hay test")
             }
         }
     }
-    if (testResult == null) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = colorResource(id = R.color.background))
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "No hay test")
-        }
-    }
+
 }
 
 
