@@ -1,38 +1,43 @@
 package com.samuel.sisvita17
 
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.samuel.sisvita17.navigation.AppNavigation
 import com.samuel.sisvita17.ui.theme.Sisvita17Theme
-import com.samuel.sisvita17.ui.view.LogInScreen
-import com.samuel.sisvita17.ui.view.user.DoTestScreen
-import com.samuel.sisvita17.ui.view.user.SignUpScreen
-import com.samuel.sisvita17.ui.view.user.UserMenuScreen
 
 class MainActivity : ComponentActivity() {
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             Sisvita17Theme {
-                LogInScreen(navController = rememberNavController())
-                Sisvita171()
+                // A surface container using the 'background' color from the theme
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    AppNavigation()
+
+                }
             }
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
+@Preview(showBackground = true)
 @Composable
-fun Sisvita171() {
-    val navController = rememberNavController()
-    //getResponse()
-    NavHost(navController = navController, startDestination = "login") {
-        composable("LogIn") { LogInScreen(navController) }
-        composable("Menu") { UserMenuScreen(navController) }
-        composable("SignUp") { SignUpScreen(navController) }
-        composable("DoTest") { DoTestScreen(navController) }
+fun GreetingPreview() {
+    Sisvita17Theme {
+        AppNavigation()
     }
 }
