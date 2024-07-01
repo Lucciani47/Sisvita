@@ -1,10 +1,10 @@
 package com.samuel.sisvita17.data.repository
 
-import com.samuel.sisvita17.data.model.LoginRequest
-import com.samuel.sisvita17.data.model.LoginResponse
-import com.samuel.sisvita17.data.model.RegistrarUsuarioRequest
-import com.samuel.sisvita17.data.model.RegistrarUsuarioResponse
-import com.samuel.sisvita17.data.model.UsuarioResponse
+import com.samuel.sisvita17.data.model.request.LoginRequest
+import com.samuel.sisvita17.data.model.response.LoginResponse
+import com.samuel.sisvita17.data.model.request.RegistrarUsuarioRequest
+import com.samuel.sisvita17.data.model.response.RegistrarUsuarioResponse
+import com.samuel.sisvita17.data.model.response.UsuarioResponse
 import com.samuel.sisvita17.network.RetrofitClient
 
 import retrofit2.Call
@@ -24,10 +24,10 @@ class UserRepository {
             }
         })
     }
-    fun registrarUsuario(nombre: String, apellidoPaterno: String, apellidoMaterno: String,
+    fun registrarUsuario(nombre: String, apellidos: String,
                   correo: String, contrasena: String, ubigeo:Int ,callback: (RegistrarUsuarioResponse?) -> Unit){
         val registrarUsuarioRequest = RegistrarUsuarioRequest(
-            nombre=nombre, apellido_paterno = apellidoPaterno, apellido_materno = apellidoMaterno,
+            nombre=nombre, apellidos = apellidos,
             correo_electronico = correo, contrasena = contrasena , ubigeo = ubigeo
         )
         RetrofitClient.apiService.registrarUsuario(registrarUsuarioRequest).enqueue(object : Callback<RegistrarUsuarioResponse>{

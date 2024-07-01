@@ -3,11 +3,11 @@ package com.samuel.sisvita17.data.repository
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.sisvita_android.utils.DateUtils
-import com.samuel.sisvita17.data.model.TestAllResponse
-import com.samuel.sisvita17.data.model.TestListResponse
-import com.samuel.sisvita17.data.model.TestRequest
-import com.samuel.sisvita17.data.model.TestRequestPregunta
-import com.samuel.sisvita17.data.model.TestResponse
+import com.samuel.sisvita17.data.model.response.TestAllResponse
+import com.samuel.sisvita17.data.model.response.TestListResponse
+import com.samuel.sisvita17.data.model.request.TestRequest
+import com.samuel.sisvita17.data.model.request.TestRequestPregunta
+import com.samuel.sisvita17.data.model.response.TestResponse
 import com.samuel.sisvita17.network.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,7 +58,7 @@ class TestRepository {
         )
         RetrofitClient.apiService.setRespuestaTest(testRequest).enqueue(object:
             Callback<TestResponse>{
-            override fun onResponse( call:Call<TestResponse>, response: Response<TestResponse>) {
+            override fun onResponse(call:Call<TestResponse>, response: Response<TestResponse>) {
                 callback(response.body())
             }
             override fun onFailure(call: Call<TestResponse>, t: Throwable) {
@@ -66,6 +66,4 @@ class TestRepository {
             }
         })
     }
-
-
 }

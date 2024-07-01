@@ -1,4 +1,4 @@
-package com.samuel.sisvita17.data.model
+package com.samuel.sisvita17.data.model.request
 
 data class TestRequest (
     val preguntas: ArrayList<TestRequestPregunta>,

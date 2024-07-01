@@ -4,7 +4,7 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.samuel.sisvita17.data.model.LoginResponse
+import com.samuel.sisvita17.data.model.response.LoginResponse
 import com.samuel.sisvita17.data.repository.UserRepository
 import com.samuel.sisvita17.utils.UserManager
 

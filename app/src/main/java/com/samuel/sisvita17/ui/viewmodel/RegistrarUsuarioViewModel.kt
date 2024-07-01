@@ -4,9 +4,8 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.samuel.sisvita17.data.model.TituloResponse
-import com.samuel.sisvita17.data.model.RegistrarUsuarioResponse
-import com.samuel.sisvita17.data.model.TituloData
+import com.samuel.sisvita17.data.model.response.RegistrarUsuarioResponse
+import com.samuel.sisvita17.data.model.response.TituloData
 import com.samuel.sisvita17.data.repository.EspecialistaRepository
 import com.samuel.sisvita17.data.repository.UserRepository
 
@@ -18,11 +17,8 @@ class RegistrarUsuarioViewModel : ViewModel() {
     private val _nombre = MutableLiveData("")
     val nombre: LiveData<String> get() = _nombre
 
-    private val _apellidoPaterno = MutableLiveData("")
-    val apellidoPaterno: LiveData<String> get() = _apellidoPaterno
-
-    private val _apellidoMaterno = MutableLiveData("")
-    val apellidoMaterno: LiveData<String> get() = _apellidoMaterno
+    private val _apellidos = MutableLiveData("")
+    val apellidos: LiveData<String> get() = _apellidos
 
     private val _correo = MutableLiveData("")
     val correo: LiveData<String> get() = _correo
@@ -87,12 +83,8 @@ class RegistrarUsuarioViewModel : ViewModel() {
         _nombre.value = newNombre
     }
 
-    fun onApellidoPaternoChange(newApellidoPaterno: String) {
-        _apellidoPaterno.value = newApellidoPaterno
-    }
-
-    fun onApellidoMaternoChange(newApellidoMaterno: String) {
-        _apellidoMaterno.value = newApellidoMaterno
+    fun onApellidoPaternoChange(newApellidos: String) {
+        _apellidos.value = newApellidos
     }
 
     fun onCorreoChange(newCorreo: String) {
@@ -115,14 +107,13 @@ class RegistrarUsuarioViewModel : ViewModel() {
 
     fun registrarUsuario() {
         val nombre = _nombre.value ?: ""
-        val apellidoPaterno = _apellidoPaterno.value ?: ""
-        val apellidoMaterno = _apellidoMaterno.value ?: ""
+        val apellidos = _apellidos.value ?: ""
         val correo = _correo.value ?: ""
         val contrasena = _contrasena.value ?: ""
         val confirmarContrasena = _confirmarContrasena.value ?: ""
         val ubigeo = _ubigeo.value?.toIntOrNull()
 
-        if (nombre.isEmpty() || apellidoPaterno.isEmpty() || apellidoMaterno.isEmpty() ||
+        if (nombre.isEmpty() || apellidos.isEmpty() ||
             correo.isEmpty() || contrasena.isEmpty() || confirmarContrasena.isEmpty() || ubigeo == null) {
             _registroValido.postValue(false)
             _mensajeResult.postValue("Complete todos los campos")
@@ -137,7 +128,7 @@ class RegistrarUsuarioViewModel : ViewModel() {
 
             if(_selectedRole.value == "Estudiante"){
                 userRepository.registrarUsuario(
-                    nombre = nombre, apellidoPaterno = apellidoPaterno, apellidoMaterno = apellidoMaterno,
+                    nombre = nombre, apellidos = apellidos,
                     correo = correo, contrasena = contrasena, ubigeo = ubigeo
                 ) { response ->
                     _registrarResult.postValue(response)
@@ -163,7 +154,7 @@ class RegistrarUsuarioViewModel : ViewModel() {
                     return
                 }
                 especialistaRespository.registrarEspecialista(
-                    nombre = nombre, apellidoPaterno = apellidoPaterno, apellidoMaterno = apellidoMaterno,
+                    nombre = nombre, apellidos = apellidos,
                     correo = correo, contrasena = contrasena, ubigeo = ubigeo,
                     titulo_id = selectedDropdownItem.value!!.titulo_id
                 ){ response ->

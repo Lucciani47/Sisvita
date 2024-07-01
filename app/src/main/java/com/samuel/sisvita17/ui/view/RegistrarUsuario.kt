@@ -5,50 +5,38 @@ import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.samuel.sisvita17.R
-import com.samuel.sisvita17.data.model.TituloData
+import com.samuel.sisvita17.data.model.response.TituloData
 import com.samuel.sisvita17.navigation.AppScreen
 import com.samuel.sisvita17.ui.viewmodel.RegistrarUsuarioViewModel
-import compose.icons.FontAwesomeIcons
-import compose.icons.fontawesomeicons.Solid
-import compose.icons.fontawesomeicons.solid.ArrowLeft
-import compose.icons.fontawesomeicons.solid.Eye
 import kotlinx.coroutines.launch
 
-import compose.icons.fontawesomeicons.solid.EyeSlash
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: RegistrarUsuarioViewModel = viewModel()) {
     val nombre by registrarUsuarioViewModel.nombre.observeAsState("")
-    val apellidoPaterno by registrarUsuarioViewModel.apellidoPaterno.observeAsState("")
-    val apellidoMaterno by registrarUsuarioViewModel.apellidoMaterno.observeAsState("")
+    val apellidoPaterno by registrarUsuarioViewModel.apellidos.observeAsState("")
     val correo by registrarUsuarioViewModel.correo.observeAsState("")
     val contrasena by registrarUsuarioViewModel.contrasena.observeAsState("")
     val confirmarContrasena by registrarUsuarioViewModel.confirmarContrasena.observeAsState("")
@@ -167,7 +155,7 @@ fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: Re
                     )
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                /*OutlinedTextField(
+                OutlinedTextField(
                     value = confirmarContrasena,
                     onValueChange = { registrarUsuarioViewModel.onConfirmarContrasenaChange(it) },
                     label = { Text("Confirmar contraseña") },
@@ -188,7 +176,7 @@ fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: Re
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                Spacer(modifier = Modifier.height(8.dp))*/
+                Spacer(modifier = Modifier.height(8.dp))
                 OutlinedTextField(
                     value = ubigeo,
                     onValueChange = { registrarUsuarioViewModel.onUbigeoChange(it) },
@@ -263,43 +251,36 @@ fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: Re
                         )
                     }
                 }
-                Row(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp), // Espacio entre los botones
-                    modifier = Modifier.fillMaxWidth(), // Ajusta el ancho del Row al tamaño del contenedor
-                    verticalAlignment = Alignment.CenterVertically // Centra verticalmente los elementos dentro del Row
+                Button(
+                    onClick = {
+                        registrarUsuarioViewModel.registrarUsuario()
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
                 ) {
-                    Button(
-                        onClick = {
-                            registrarUsuarioViewModel.registrarUsuario()
-                        },
-                        modifier = Modifier
-                            .weight(1f), // Ocupa el mismo espacio que el otro botón
-                        shape = RoundedCornerShape(8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary
-                        )
-                    ) {
-                        Text(
-                            text = "Registrarme",
-                            color = MaterialTheme.colorScheme.onPrimary,
-                            style = MaterialTheme.typography.labelMedium
-                        )
-                    }
-                    Button(
-                        onClick = { navController.navigate(AppScreen.login.route) },
-                        modifier = Modifier
-                            .weight(1f), // Ocupa el mismo espacio que el otro botón
-                        shape = RoundedCornerShape(8.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary
-                        )
-                    ) {
-                        Text(
-                            text = "Volver",
-                            color = MaterialTheme.colorScheme.onPrimary,
-                            style = MaterialTheme.typography.labelMedium
-                        )
-                    }
+                    Text(
+                        text = "Registrarme",
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(
+                    onClick = { navController.navigate(AppScreen.login.route) },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Text(
+                        text = "Volver",
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        style = MaterialTheme.typography.labelMedium
+                    )
                 }
             }
         }

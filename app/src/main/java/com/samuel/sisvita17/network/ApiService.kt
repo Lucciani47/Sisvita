@@ -1,16 +1,16 @@
 package com.samuel.sisvita17.network
 
-import com.samuel.sisvita17.data.model.LoginRequest
-import com.samuel.sisvita17.data.model.LoginResponse
-import com.samuel.sisvita17.data.model.RegistrarEspecialistaRequest
-import com.samuel.sisvita17.data.model.RegistrarUsuarioRequest
-import com.samuel.sisvita17.data.model.RegistrarUsuarioResponse
-import com.samuel.sisvita17.data.model.TestAllResponse
-import com.samuel.sisvita17.data.model.TestListResponse
-import com.samuel.sisvita17.data.model.TestRequest
-import com.samuel.sisvita17.data.model.TestResponse
-import com.samuel.sisvita17.data.model.TituloResponse
-import com.samuel.sisvita17.data.model.UsuarioResponse
+import com.samuel.sisvita17.data.model.request.LoginRequest
+import com.samuel.sisvita17.data.model.response.LoginResponse
+import com.samuel.sisvita17.data.model.request.RegistrarEspecialistaRequest
+import com.samuel.sisvita17.data.model.request.RegistrarUsuarioRequest
+import com.samuel.sisvita17.data.model.response.RegistrarUsuarioResponse
+import com.samuel.sisvita17.data.model.response.TestAllResponse
+import com.samuel.sisvita17.data.model.response.TestListResponse
+import com.samuel.sisvita17.data.model.request.TestRequest
+import com.samuel.sisvita17.data.model.response.TestResponse
+import com.samuel.sisvita17.data.model.response.TituloResponse
+import com.samuel.sisvita17.data.model.response.UsuarioResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,14 +24,15 @@ interface ApiService {
     fun registrarUsuario(@Body registrarUsuarioRequest: RegistrarUsuarioRequest): Call<RegistrarUsuarioResponse>
     @POST("especialistas")
     fun registrarEspecialista(@Body registrarEspecialistaRequest: RegistrarEspecialistaRequest): Call<RegistrarUsuarioResponse>
-    @GET("PruebaEvaluacion")
-    fun getTests(): Call<TestListResponse>
     @GET("titulo")
     fun getTitulos(): Call<TituloResponse>
+    @GET("pruebas")
+    fun getTests(): Call<TestListResponse>
+    @POST("pruebas/responder")
+    fun setRespuestaTest(@Body testRequest: TestRequest): Call<TestResponse>
     @GET("test/all/{testId}")
     fun getTestById(@Path("testId") testId: Int): Call<TestAllResponse>
     @GET("usuarios/{usuario_id}")
     fun getUsuario(@Path("usuario_id") usuario_id:Int): Call<UsuarioResponse>
-    @POST("PruebaEvaluacion/responder")
-    fun setRespuestaTest(@Body testRequest: TestRequest): Call<TestResponse>
+
 }

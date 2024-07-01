@@ -6,9 +6,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.samuel.sisvita17.utils.UserManager
-import com.samuel.sisvita17.data.model.TestAllResponse
-import com.samuel.sisvita17.data.model.TestRequestPregunta
-import com.samuel.sisvita17.data.model.TestResponse
+import com.samuel.sisvita17.data.model.response.TestAllResponse
+import com.samuel.sisvita17.data.model.request.TestRequestPregunta
+import com.samuel.sisvita17.data.model.response.TestResponse
 import com.samuel.sisvita17.data.repository.TestRepository
 
 class RealizarTestViewModel : ViewModel() {

@@ -1,4 +1,4 @@
-package com.samuel.sisvita17.data.model
+package com.samuel.sisvita17.data.model.response
 
 data class UsuarioResponse(
     val data: Usuario,

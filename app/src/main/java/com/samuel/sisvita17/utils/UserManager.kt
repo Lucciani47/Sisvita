@@ -1,6 +1,6 @@
 package com.samuel.sisvita17.utils
 
-import com.samuel.sisvita17.data.model.Usuario
+import com.samuel.sisvita17.data.model.response.Usuario
 
 object UserManager {
     private var usuario: Usuario? = null

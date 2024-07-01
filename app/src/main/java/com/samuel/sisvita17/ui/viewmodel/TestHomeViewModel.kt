@@ -1,10 +1,9 @@
 package com.samuel.sisvita17.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.samuel.sisvita17.data.model.TestListResponse
+import com.samuel.sisvita17.data.model.response.TestListResponse
 import com.samuel.sisvita17.data.repository.TestRepository
 
 class TestHomeViewModel: ViewModel()  {

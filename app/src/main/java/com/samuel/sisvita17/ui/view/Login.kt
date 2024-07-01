@@ -111,8 +111,7 @@ fun Login(navController: NavController, loginViewModel: LoginViewModel = viewMod
                     loginViewModel.onMensajeChange("")
                     loginViewModel.login()
             },
-            modifier = Modifier
-                .width(128.dp),
+            modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary
@@ -127,8 +126,7 @@ fun Login(navController: NavController, loginViewModel: LoginViewModel = viewMod
         Spacer(modifier = Modifier.height(8.dp))
         Button(
             onClick = { navController.navigate(AppScreen.registrarUsuario.route) },
-            modifier = Modifier
-                .width(128.dp),
+            modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary
