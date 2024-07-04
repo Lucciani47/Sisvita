@@ -60,6 +60,7 @@ fun Home(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        InformationCard()
         Spacer(modifier = Modifier.height(20.dp))
         Image(
             painter = painterResource(id = R.mipmap.logo_sisvita),
@@ -76,7 +77,7 @@ fun Home(navController: NavController) {
                 Text("Consultar Resultado")
             }
             Button(onClick = { /* TODO: Handle click */ },modifier = Modifier.fillMaxWidth()) {
-                Text("Actualiar datos")
+                Text("Actualizar datos")
             }
             Button(onClick = { UserManager.clearUser()
                 navController.navigate(AppScreen.login.route) {
@@ -88,12 +89,61 @@ fun Home(navController: NavController) {
                 Text("Cerrar sesión")
             }
         } else if (UserManager.getRol() == "Especialista") {
-            Button(onClick = { navController.navigate(AppScreen.vigilancia.route)}) {
-                Text("Realizar Vigilancia")
-            }
-            Button(onClick = { navController.navigate(AppScreen.mapaDeCarlor.route)}) {
+            Button(onClick = { navController.navigate(AppScreen.mapaDeCarlor.route)},
+                modifier = Modifier.fillMaxWidth()) {
                 Text("Mapa De Calor")
             }
+            Button(onClick = { navController.navigate(AppScreen.vigilancia.route)},
+                modifier = Modifier.fillMaxWidth()) {
+                Text("Realizar Vigilancia")
+            }
+            Button(onClick = { UserManager.clearUser()
+                navController.navigate(AppScreen.login.route) {
+                    popUpTo(navController.graph.startDestinationId) {
+                        inclusive = true
+                    }
+                } },
+                modifier = Modifier.fillMaxWidth()) {
+                Text("Cerrar sesión")
+            }
+        }
+    }
+}
+
+@Composable
+fun InformationCard(loginViewModel: LoginViewModel = viewModel()) {
+    val email: String by loginViewModel.correo.observeAsState("")
+    val user = UserManager.getUser()
+    if (user != null) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondary,
+            )
+        ) {
+            Text(
+                text = "Bienvenido " + user.nombre + " "+ user.apellidos,
+                color = Color.White,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+            )
+
+            /*Column(
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.secondary)
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = user.nombre + " "+ user.apellidos,
+                    color = Color.White
+                )
+            }*/
         }
     }
 }

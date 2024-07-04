@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
@@ -36,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -65,32 +68,33 @@ fun RealizarTest(
 
     realizarTestViewModel.getTestById(id)
     Scaffold(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = colorResource(id = R.color.background))
     ) {
         Spacer(modifier = Modifier.height(100.dp))
         LazyColumn(contentPadding = it) {
             testResult?.data?.get(0)?.let { testData ->
-                item {
+                /*item {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(color = colorResource(id = R.color.background))
                             .padding(16.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                            text = testData.titulo.toString(),
+                            text = testData.titulo,
                             style = MaterialTheme.typography.headlineLarge
                         )
                     }
-                }
+                }*/
                 items(testData.preguntas) {
                     PreguntasItems(
                         preguntas = it,
                         viewModel = realizarTestViewModel,
                         modifier = Modifier
                             .fillMaxSize()
-                            .background(color = colorResource(id = R.color.background))
                     )
                 }
 
@@ -107,7 +111,7 @@ fun RealizarTest(
                     }
                     Row(
                         modifier = Modifier
-                            .fillMaxWidth()
+                            .fillMaxSize()
                             .padding(16.dp),
                         horizontalArrangement = Arrangement.End
                     ) {
@@ -125,6 +129,7 @@ fun RealizarTest(
                 }
             }
         }
+
 
         if (testGuardado != null && showResultDialog) {
             ResultDialog(

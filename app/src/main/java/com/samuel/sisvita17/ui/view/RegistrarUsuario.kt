@@ -109,18 +109,6 @@ fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: Re
                     )
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                /*OutlinedTextField(
-                    value = apellidoMaterno,
-                    onValueChange = { registrarUsuarioViewModel.onApellidoMaternoChange(it) },
-                    label = { Text("Apellido Materno") },
-                    placeholder = { Text("Ingrese su apellido materno") },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                    )
-                )
-                Spacer(modifier = Modifier.height(8.dp))*/
                 OutlinedTextField(
                     value = correo,
                     onValueChange = { registrarUsuarioViewModel.onCorreoChange(it) },
