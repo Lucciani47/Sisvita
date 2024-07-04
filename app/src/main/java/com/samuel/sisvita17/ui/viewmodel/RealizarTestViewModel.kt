@@ -80,6 +80,4 @@ class RealizarTestViewModel : ViewModel() {
             _testMensaje.postValue("No todas las preguntas han sido respondidas.")
         }
     }
-
-
 }

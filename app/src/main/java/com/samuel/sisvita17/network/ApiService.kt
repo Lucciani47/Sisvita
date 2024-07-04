@@ -24,15 +24,14 @@ interface ApiService {
     fun registrarUsuario(@Body registrarUsuarioRequest: RegistrarUsuarioRequest): Call<RegistrarUsuarioResponse>
     @POST("especialistas")
     fun registrarEspecialista(@Body registrarEspecialistaRequest: RegistrarEspecialistaRequest): Call<RegistrarUsuarioResponse>
+    @POST("pruebas/responder")
+    fun setRespuestaTest(@Body testRequest: TestRequest): Call<TestResponse>
     @GET("titulo")
     fun getTitulos(): Call<TituloResponse>
     @GET("pruebas")
     fun getTests(): Call<TestListResponse>
-    @POST("pruebas/responder")
-    fun setRespuestaTest(@Body testRequest: TestRequest): Call<TestResponse>
-    @GET("test/all/{testId}")
-    fun getTestById(@Path("testId") testId: Int): Call<TestAllResponse>
+    @GET("pruebas/all/{prueba_id}")
+    fun getTestById(@Path("prueba_id") prueba_id: Int): Call<TestAllResponse>
     @GET("usuarios/{usuario_id}")
     fun getUsuario(@Path("usuario_id") usuario_id:Int): Call<UsuarioResponse>
-
 }

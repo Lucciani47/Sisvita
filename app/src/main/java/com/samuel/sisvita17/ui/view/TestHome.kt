@@ -170,7 +170,7 @@ fun TestItem(
                         .padding(16.dp),
                     horizontalArrangement = Arrangement.End
                 ) {
-                    Button(onClick = {  navController.navigate("realizarTest/"+test.test_id.toString())},
+                    Button(onClick = {  navController.navigate("realizarTest/"+test.prueba_id.toString())},
                         modifier = Modifier
                             .fillMaxWidth(),
                         colors = ButtonDefaults.buttonColors(

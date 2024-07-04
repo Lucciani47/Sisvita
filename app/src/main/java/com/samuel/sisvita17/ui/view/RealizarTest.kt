@@ -4,6 +4,7 @@ import android.os.Build
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,16 +35,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.samuel.sisvita17.R
 import com.samuel.sisvita17.data.model.response.TestAllPreguntas
 import com.samuel.sisvita17.data.model.response.TestResponse
 import com.samuel.sisvita17.navigation.AppScreen
 import com.samuel.sisvita17.ui.viewmodel.RealizarTestViewModel
+import com.samuel.sisvita17.data.model.request.TestRequest
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,22 +65,6 @@ fun RealizarTest(
 
     realizarTestViewModel.getTestById(id)
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = "REALIZANDO TEST ",
-                        modifier = Modifier.fillMaxWidth(),
-                        textAlign = TextAlign.Center,
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold
-                    )
-                },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                )
-            )
-        }
     ) {
         Spacer(modifier = Modifier.height(100.dp))
         LazyColumn(contentPadding = it) {
@@ -85,13 +73,13 @@ fun RealizarTest(
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
+                            .background(color = colorResource(id = R.color.background))
                             .padding(16.dp),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
-                           //text = testData.titulo.toString(),
-                            text = testData.titulo,
+                            text = testData.titulo.toString(),
                             style = MaterialTheme.typography.headlineLarge
                         )
                     }
@@ -101,6 +89,8 @@ fun RealizarTest(
                         preguntas = it,
                         viewModel = realizarTestViewModel,
                         modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = colorResource(id = R.color.background))
                     )
                 }
 

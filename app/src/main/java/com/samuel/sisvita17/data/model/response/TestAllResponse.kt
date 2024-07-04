@@ -9,7 +9,7 @@ data class TestAllData(
     val fecha_creacion : String,
     val preguntas: ArrayList<TestAllPreguntas>,
     val test_description : String,
-    val test_id : String,
+    val prueba_id : String,
     val titulo : String
 
 )

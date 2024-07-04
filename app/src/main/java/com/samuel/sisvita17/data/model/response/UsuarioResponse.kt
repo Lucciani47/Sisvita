@@ -11,5 +11,4 @@ data class Usuario(
     val fecha_registro: String,
     val correo_electronico :String,
     val apellidos : String,
-    //val apellido_materno : String,
 )
