@@ -146,7 +146,85 @@ class RegistrarUsuarioViewModel : ViewModel() {
                         _mensajeResult.postValue("Error al crear el usuario")
                     }
                 }
-            }
+            }/*
+            else if (_selectedRole.value == "Especialista"){
+                if(selectedDropdownItem.value == null){
+                    _registroValido.postValue(false)
+                    _mensajeResult.postValue("Escoge un titulo")
+                    return
+                }
+                especialistaRespository.registrarEspecialista(
+                    nombre = nombre, apellidos = apellidos,
+                    correo = correo, contrasena = contrasena, ubigeo = ubigeo,
+                    titulo_id = selectedDropdownItem.value!!.titulo_id
+                ){ response ->
+                    _registrarResult.postValue(response)
+                    if (response?.message == "Nuevo Especialista creado") {
+                        _registroValido.postValue(true)
+                        _mensajeResult.postValue("")
+                    } else if (response?.message == "Datos incompletos") {
+                        _registroValido.postValue(false)
+                        _mensajeResult.postValue("Complete todos los campos")
+                    } else if (response?.message == "Correo electrónico ya registrado") {
+                        _registroValido.postValue(false)
+                        _mensajeResult.postValue("Correo electrónico ya registrado")
+                    } else {
+                        _registroValido.postValue(false)
+                        _mensajeResult.postValue("Error al crear el especialista")
+                    }
+                }
+            }*/
+        }
+    }
+
+    fun registrarEspecialista() {
+        val nombre = _nombre.value ?: ""
+        val apellidos = _apellidos.value ?: ""
+        val correo = _correo.value ?: ""
+        val contrasena = _contrasena.value ?: ""
+        val confirmarContrasena = _confirmarContrasena.value ?: ""
+        val ubigeo = _ubigeo.value?.toIntOrNull()
+
+        if (nombre.isEmpty() || apellidos.isEmpty() ||
+            correo.isEmpty() || contrasena.isEmpty() || confirmarContrasena.isEmpty() || ubigeo == null) {
+            _registroValido.postValue(false)
+            _mensajeResult.postValue("Complete todos los campos")
+            return
+        }
+
+        if (_correoValido.value == false) {
+            _mensajeResult.postValue("Correo invalido")
+        } else if (_contrasenaValido.value == false) {
+            _mensajeResult.postValue("Contrasenas no conciden")
+        } else {
+
+            if(_selectedRole.value == "Estudiante"){
+                if(selectedDropdownItem.value == null){
+                    _registroValido.postValue(false)
+                    _mensajeResult.postValue("Escoge un titulo")
+                    return
+                }
+                especialistaRespository.registrarEspecialista(
+                    nombre = nombre, apellidos = apellidos,
+                    correo = correo, contrasena = contrasena, ubigeo = ubigeo,
+                    titulo_id = selectedDropdownItem.value!!.titulo_id
+                ){ response ->
+                    _registrarResult.postValue(response)
+                    if (response?.message == "Nuevo Especialista creado") {
+                        _registroValido.postValue(true)
+                        _mensajeResult.postValue("")
+                    } else if (response?.message == "Datos incompletos") {
+                        _registroValido.postValue(false)
+                        _mensajeResult.postValue("Complete todos los campos")
+                    } else if (response?.message == "Correo electrónico ya registrado") {
+                        _registroValido.postValue(false)
+                        _mensajeResult.postValue("Correo electrónico ya registrado")
+                    } else {
+                        _registroValido.postValue(false)
+                        _mensajeResult.postValue("Error al crear el especialista")
+                    }
+                }
+            }/*
             else if (_selectedRole.value == "Especialista"){
                 if(selectedDropdownItem.value == null){
                     _registroValido.postValue(false)
@@ -175,7 +253,7 @@ class RegistrarUsuarioViewModel : ViewModel() {
                 }
 
             }
-
+*/
         }
     }
 }

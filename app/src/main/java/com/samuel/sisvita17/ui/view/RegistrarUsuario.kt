@@ -34,25 +34,14 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: RegistrarUsuarioViewModel = viewModel()) {
-    val nombre by registrarUsuarioViewModel.nombre.observeAsState("")
-    val apellidoPaterno by registrarUsuarioViewModel.apellidos.observeAsState("")
-    val correo by registrarUsuarioViewModel.correo.observeAsState("")
-    val contrasena by registrarUsuarioViewModel.contrasena.observeAsState("")
-    val confirmarContrasena by registrarUsuarioViewModel.confirmarContrasena.observeAsState("")
-    val correoValido by registrarUsuarioViewModel.correoValido.observeAsState(true)
-    val ubigeo by registrarUsuarioViewModel.ubigeo.observeAsState("")
-    var contrasenaVisible by remember { mutableStateOf(false) }
-    var confirmarContrasenaVisible by remember { mutableStateOf(false) }
+fun RegistrarUsuario(
+    navController: NavController,
+    registrarUsuarioViewModel: RegistrarUsuarioViewModel = viewModel()
+) {
     val registroValido by registrarUsuarioViewModel.registroValido.observeAsState(false)
-    val mensajeResult by registrarUsuarioViewModel.mensajeResult.observeAsState("")
-    val contrasenaValido: Boolean by registrarUsuarioViewModel.contrasenaValido.observeAsState(false)
     val roles = registrarUsuarioViewModel.roles
     val selectedRole by registrarUsuarioViewModel.selectedRole.observeAsState(roles[0])
     val context = LocalContext.current
-
-    val dropdownItems by registrarUsuarioViewModel.dropdownItems.observeAsState(emptyList())
-    val selectedDropdownItem by registrarUsuarioViewModel.selectedDropdownItem.observeAsState()
 
     LaunchedEffect(Unit) {
         launch {
@@ -85,164 +74,9 @@ fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: Re
                     modifier = Modifier.size(256.dp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = nombre,
-                    onValueChange = { registrarUsuarioViewModel.onNombreChange(it) },
-                    label = { Text("Nombre") },
-                    placeholder = { Text("Ingrese su nombre") },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                    )
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = apellidoPaterno,
-                    onValueChange = { registrarUsuarioViewModel.onApellidoPaternoChange(it) },
-                    label = { Text("Apellidos") },
-                    placeholder = { Text("Ingrese sus apellidos") },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                    )
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = correo,
-                    onValueChange = { registrarUsuarioViewModel.onCorreoChange(it) },
-                    label = { Text("Correo") },
-                    placeholder = { Text("Ingrese su correo") },
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                    ),
-                    isError = !correoValido && correo.isNotEmpty()
-                )
-                if (!correoValido && correo.isNotEmpty()) {
-                    Text(
-                        text = "Correo electrónico no válido",
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = contrasena,
-                    onValueChange = { registrarUsuarioViewModel.onContrasenaChange(it) },
-                    label = { Text("Contraseña") },
-                    placeholder = { Text("Ingrese su contraseña") },
-                    visualTransformation = if (contrasenaVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                    )
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = confirmarContrasena,
-                    onValueChange = { registrarUsuarioViewModel.onConfirmarContrasenaChange(it) },
-                    label = { Text("Confirmar contraseña") },
-                    placeholder = { Text("Ingrese su contraseña nuevamente") },
-                    visualTransformation = if (confirmarContrasenaVisible) VisualTransformation.None else PasswordVisualTransformation(),
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                    ),
-                    isError = !contrasenaValido && confirmarContrasena.isNotEmpty()
-                )
-                if (!contrasenaValido && confirmarContrasena.isNotEmpty()) {
-                    Text(
-                        text = "Contraseña no conciden",
-                        color = MaterialTheme.colorScheme.error,
-                        style = MaterialTheme.typography.bodySmall,
-                        modifier = Modifier.padding(start = 16.dp)
-                    )
-                }
-                Spacer(modifier = Modifier.height(8.dp))
-                OutlinedTextField(
-                    value = ubigeo,
-                    onValueChange = { registrarUsuarioViewModel.onUbigeoChange(it) },
-                    label = { Text("Ubigeo") },
-                    placeholder = { Text("Ingrese su ubigeo") },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    modifier = Modifier.fillMaxWidth(),
-                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                        focusedBorderColor = MaterialTheme.colorScheme.primary,
-                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
-                    )
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text("Selecciona tu rol:")
-                Spacer(modifier = Modifier.height(8.dp))
-                Row {
-                    roles.forEach { role ->
-                        RadioButton(
-                            selected = selectedRole == role,
-                            onClick = { registrarUsuarioViewModel.onSelectedRoleChange(role) }
-                        )
-                        Text(role)
-                    }
-                }
-
-                if (selectedRole == "Especialista") {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    var expanded by remember { mutableStateOf(false) }
-
-                    ExposedDropdownMenuBox(
-                        expanded = expanded,
-                        onExpandedChange = { expanded = !expanded },
-                        modifier = Modifier
-                    ) {
-                        OutlinedTextField(
-                            readOnly = true,
-                            value = selectedDropdownItem?.titulo_name ?: "",
-                            onValueChange = {},
-                            label = { Text("Seleccion su titulo")},
-                            trailingIcon = {
-                                ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                            },
-                            colors = OutlinedTextFieldDefaults.colors(),
-                            modifier = Modifier
-                                .menuAnchor()
-                                .fillMaxWidth()
-                        )
-
-                        ExposedDropdownMenu(
-                            expanded = expanded,
-                            onDismissRequest = { expanded = false }) {
-                            dropdownItems.forEach { option: TituloData ->
-                                DropdownMenuItem(
-                                    text = { Text(text = option.titulo_name) },
-                                    onClick = {
-                                        expanded = false
-                                        registrarUsuarioViewModel.onSelectedDropdownItemChange(option)
-                                    }
-                                )
-                            }
-                        }
-                    }
-                }
-
-                mensajeResult?.let {
-                    if (registroValido == false) {
-                        Spacer(modifier = Modifier.height(10.dp))
-                        Text(
-                            text = it,
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.error
-                        )
-                    }
-                }
                 Button(
                     onClick = {
-                        registrarUsuarioViewModel.registrarUsuario()
-                    },
+                        navController.navigate(AppScreen.registrarEstudiante.route) },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(8.dp),
                     colors = ButtonDefaults.buttonColors(
@@ -250,7 +84,23 @@ fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: Re
                     )
                 ) {
                     Text(
-                        text = "Registrarme",
+                        text = "Registro de Estudiante",
+                        color = MaterialTheme.colorScheme.onPrimary,
+                        style = MaterialTheme.typography.labelMedium
+                    )
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(
+                    onClick = {
+                        navController.navigate(AppScreen.registrarEspecialista.route) },
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(8.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    Text(
+                        text = "Registro de Especialista",
                         color = MaterialTheme.colorScheme.onPrimary,
                         style = MaterialTheme.typography.labelMedium
                     )
@@ -273,11 +123,4 @@ fun RegistrarUsuario(navController: NavController, registrarUsuarioViewModel: Re
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun LoginPreview() {
-    val navController = rememberNavController()
-    RegistrarUsuario(navController = navController)
 }

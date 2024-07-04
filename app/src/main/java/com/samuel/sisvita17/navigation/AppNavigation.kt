@@ -12,6 +12,8 @@ import com.samuel.sisvita17.ui.view.Home
 import com.samuel.sisvita17.ui.view.Login
 import com.samuel.sisvita17.ui.view.MapaDeCalor
 import com.samuel.sisvita17.ui.view.RealizarTest
+import com.samuel.sisvita17.ui.view.RegistrarEspecialista
+import com.samuel.sisvita17.ui.view.RegistrarEstudiante
 import com.samuel.sisvita17.ui.view.RegistrarUsuario
 import com.samuel.sisvita17.ui.view.TestHome
 import com.samuel.sisvita17.ui.view.Vigilancia
@@ -30,6 +32,12 @@ fun AppNavigation(){
         }
         composable(route = AppScreen.registrarUsuario.route){
             RegistrarUsuario(navController)
+        }
+        composable(route = AppScreen.registrarEstudiante.route){
+            RegistrarEstudiante(navController)
+        }
+        composable(route = AppScreen.registrarEspecialista.route){
+            RegistrarEspecialista(navController)
         }
         composable(route = AppScreen.testHome.route){
             TestHome(navController)

@@ -75,7 +75,7 @@ fun RealizarTest(
         Spacer(modifier = Modifier.height(100.dp))
         LazyColumn(contentPadding = it) {
             testResult?.data?.get(0)?.let { testData ->
-                /*item {
+                item {
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
@@ -88,7 +88,7 @@ fun RealizarTest(
                             style = MaterialTheme.typography.headlineLarge
                         )
                     }
-                }*/
+                }
                 items(testData.preguntas) {
                     PreguntasItems(
                         preguntas = it,

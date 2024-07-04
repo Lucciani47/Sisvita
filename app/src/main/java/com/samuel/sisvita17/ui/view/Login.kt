@@ -114,7 +114,8 @@ fun Login(navController: NavController, loginViewModel: LoginViewModel = viewMod
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
+               containerColor = MaterialTheme.colorScheme.tertiary,
+                        //containerColor = colorResource(id = R.color.botones)
             )
         ) {
             Text(
@@ -129,7 +130,7 @@ fun Login(navController: NavController, loginViewModel: LoginViewModel = viewMod
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(8.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = MaterialTheme.colorScheme.tertiary,
             )
         ) {
             Text(
