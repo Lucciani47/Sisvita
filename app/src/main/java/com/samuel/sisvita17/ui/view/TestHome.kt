@@ -48,7 +48,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.sisvita_android.utils.DateUtils
+import com.samuel.sisvita17.utils.DateUtils
 import com.samuel.sisvita17.R
 import com.samuel.sisvita17.data.model.response.TestListData
 import com.samuel.sisvita17.navigation.AppScreen

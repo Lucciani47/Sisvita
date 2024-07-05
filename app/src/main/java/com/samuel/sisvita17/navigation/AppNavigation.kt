@@ -1,4 +1,5 @@
 package com.samuel.sisvita17.navigation
+
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
@@ -7,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.samuel.sisvita17.ui.view.Vigilancia
 import com.samuel.sisvita17.ui.view.EvaluarTest
 import com.samuel.sisvita17.ui.view.Home
 import com.samuel.sisvita17.ui.view.Login
@@ -15,30 +17,29 @@ import com.samuel.sisvita17.ui.view.RegistrarEspecialista
 import com.samuel.sisvita17.ui.view.RegistrarEstudiante
 import com.samuel.sisvita17.ui.view.RegistrarUsuario
 import com.samuel.sisvita17.ui.view.TestHome
-import com.samuel.sisvita17.ui.view.Vigilancia
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun AppNavigation(){
+fun AppNavigation() {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = AppScreen.login.route){
+    NavHost(navController = navController, startDestination = AppScreen.login.route) {
 
-        composable(route = AppScreen.login.route){
+        composable(route = AppScreen.login.route) {
             Login(navController)
         }
-        composable(route= AppScreen.home.route){
+        composable(route = AppScreen.home.route) {
             Home(navController)
         }
-        composable(route = AppScreen.registrarUsuario.route){
+        composable(route = AppScreen.registrarUsuario.route) {
             RegistrarUsuario(navController)
         }
-        composable(route = AppScreen.registrarEstudiante.route){
+        composable(route = AppScreen.registrarEstudiante.route) {
             RegistrarEstudiante(navController)
         }
-        composable(route = AppScreen.registrarEspecialista.route){
+        composable(route = AppScreen.registrarEspecialista.route) {
             RegistrarEspecialista(navController)
         }
-        composable(route = AppScreen.testHome.route){
+        composable(route = AppScreen.testHome.route) {
             TestHome(navController)
         }
         composable(
@@ -47,12 +48,18 @@ fun AppNavigation(){
         ) { backStackEntry ->
             RealizarTest(backStackEntry.arguments?.getInt("testId") ?: 0, navController)
         }
-        composable(AppScreen.vigilancia.route){
+        composable(AppScreen.vigilancia.route) {
             Vigilancia(navController)
         }
-        composable(AppScreen.evaluarTest.route){
-            EvaluarTest(navController)
+        composable(
+            route = AppScreen.evaluarTest.route + "/{res_user_id}",
+            arguments = listOf(navArgument("res_user_id") { type = NavType.IntType })
+        ) { backStackEntry ->
+            EvaluarTest(
+                resUserId = backStackEntry.arguments?.getInt("res_user_id") ?: 0,
+                navController = navController
+            )
         }
-    }
 
+    }
 }

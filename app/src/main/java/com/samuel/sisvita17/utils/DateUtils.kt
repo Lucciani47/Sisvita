@@ -1,4 +1,4 @@
-package com.example.sisvita_android.utils
+package com.samuel.sisvita17.utils
 
 import android.os.Build
 import androidx.annotation.RequiresApi
