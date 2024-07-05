@@ -8,7 +8,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -43,18 +42,6 @@ fun RegistrarUsuario(
     val selectedRole by registrarUsuarioViewModel.selectedRole.observeAsState(roles[0])
     val context = LocalContext.current
 
-    LaunchedEffect(Unit) {
-        launch {
-            registrarUsuarioViewModel.iniciarTitulo()
-        }
-    }
-    LaunchedEffect(registroValido) {
-        if (registroValido == true) {
-            Toast.makeText(context, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
-            registrarUsuarioViewModel.onRegistroValidoChange()
-            navController.navigate(AppScreen.login.route)
-        }
-    }
 
     Column(
         modifier = Modifier

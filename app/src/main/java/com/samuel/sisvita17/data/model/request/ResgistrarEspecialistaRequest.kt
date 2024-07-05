@@ -6,5 +6,5 @@ data class RegistrarEspecialistaRequest(
     val correo_electronico: String,
     val contrasena: String,
     val ubigeo: Int,
-    val titulo_id: Int
+    val colegiatura: Int
 )
