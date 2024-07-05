@@ -98,14 +98,7 @@ class VigilanciaViewModel : ViewModel() {
                 }
             }
         }
-        testRepository.getAnsiedadSemaforo {
-            Response->
-            if (Response != null) {
-                for(data in Response.data){
-                    _testNivel.postValue(ArrayList((_testNivel.value ?: arrayListOf()).apply { add(data.semaforo) }))
-                }
-            }
-        }
+
 
     }
 
