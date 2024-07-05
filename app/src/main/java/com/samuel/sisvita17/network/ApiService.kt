@@ -35,8 +35,6 @@ interface ApiService {
     fun setRespuestaTest(@Body testRequest: TestRequest): Call<TestResponse>
     @POST("diagnostico")
     fun setDiagnostico(@Body registrarDiagnosticoRequest: RegistrarDiagnosticoRequest): Call<RegistrarDiagnosticoResponse>
-    @GET("titulo")
-    fun getTitulos(): Call<TituloResponse>
     @GET("pruebas")
     fun getTests(): Call<TestListResponse>
     @GET("pruebas/vigilancia")
@@ -49,8 +47,5 @@ interface ApiService {
     fun getUsuario(@Path("usuario_id") usuario_id:Int): Call<UsuarioResponse>
     @GET("ansiedad")
     fun getNivelAnsiedad():Call<NivelAnsiedadResponse>
-    @GET("ansiedad-semaforo")
-    fun getAnsiedadSemaforo(): Call<AnsiedadSemaforoResponse>
-    @GET("tratamientos")
-    fun getTratamientos():Call<TratamientosResponse>
+
 }

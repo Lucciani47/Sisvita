@@ -92,11 +92,11 @@ fun Home(navController: NavController) {
                 Text("Cerrar sesión")
             }
         } else if (UserManager.getRol() == "Especialista") {
-            Button(onClick = { navController.navigate(AppScreen.mapaDeCarlor.route)},
+            Button(onClick = { },
                 modifier = Modifier.fillMaxWidth()) {
                 Text("Mapa De Calor")
             }
-            Button(onClick = { navController.navigate(AppScreen.vigilancia.route)},
+            Button(onClick = {},
                 modifier = Modifier.fillMaxWidth()) {
                 Text("Realizar Vigilancia")
             }

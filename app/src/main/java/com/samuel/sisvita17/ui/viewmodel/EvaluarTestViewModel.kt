@@ -45,11 +45,7 @@ class EvaluarTestViewModel : ViewModel() {
                 _dataEstudiante.postValue(response)
             }
         }
-        testRepository.getTratamientos { response ->
-            if (response != null) {
-                _tratamientosResponse.postValue(response)
-            }
-        }
+
         testRepository.getNivelAnsiedad { response ->
             if (response != null) {
                 _nivelAnsiedadResponse.postValue(response)

@@ -92,22 +92,7 @@ class TestRepository {
         )
     }
 
-    fun getAnsiedadSemaforo(callback: (AnsiedadSemaforoResponse?) -> Unit) {
-        RetrofitClient.apiService.getAnsiedadSemaforo().enqueue(
-            object : Callback<AnsiedadSemaforoResponse> {
-                override fun onResponse(
-                    call: Call<AnsiedadSemaforoResponse>,
-                    response: Response<AnsiedadSemaforoResponse>
-                ) {
-                    callback(response.body())
-                }
 
-                override fun onFailure(call: Call<AnsiedadSemaforoResponse>, t: Throwable) {
-                    callback(null)
-                }
-            }
-        )
-    }
 
     fun getVigilanciabyId(res_user_id: Int, callback: (EvaluarTestDataResponse?) -> Unit) {
         RetrofitClient.apiService.getVigilanciabyId(res_user_id = res_user_id).enqueue(
@@ -126,22 +111,7 @@ class TestRepository {
         )
     }
 
-    fun getTratamientos(callback: (TratamientosResponse?) -> Unit) {
-        RetrofitClient.apiService.getTratamientos().enqueue(
-            object : Callback<TratamientosResponse> {
-                override fun onResponse(
-                    call: Call<TratamientosResponse>,
-                    response: Response<TratamientosResponse>
-                ) {
-                    callback(response.body())
-                }
 
-                override fun onFailure(call: Call<TratamientosResponse>, t: Throwable) {
-                    callback(null)
-                }
-            }
-        )
-    }
 
     fun getNivelAnsiedad(callback: (NivelAnsiedadResponse?) -> Unit) {
         RetrofitClient.apiService.getNivelAnsiedad().enqueue(

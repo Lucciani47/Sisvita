@@ -8,7 +8,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.samuel.sisvita17.ui.view.Vigilancia
 import com.samuel.sisvita17.ui.view.EvaluarTest
 import com.samuel.sisvita17.ui.view.Home
 import com.samuel.sisvita17.ui.view.Login
@@ -48,9 +47,7 @@ fun AppNavigation() {
         ) { backStackEntry ->
             RealizarTest(backStackEntry.arguments?.getInt("testId") ?: 0, navController)
         }
-        composable(AppScreen.vigilancia.route) {
-            Vigilancia(navController)
-        }
+
         composable(
             route = AppScreen.evaluarTest.route + "/{res_user_id}",
             arguments = listOf(navArgument("res_user_id") { type = NavType.IntType })
