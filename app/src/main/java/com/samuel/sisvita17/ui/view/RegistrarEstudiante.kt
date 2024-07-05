@@ -50,14 +50,7 @@ fun RegistrarEstudiante(navController: NavController, registrarUsuarioViewModel:
     val selectedRole by registrarUsuarioViewModel.selectedRole.observeAsState(roles[0])
     val context = LocalContext.current
 
-    val dropdownItems by registrarUsuarioViewModel.dropdownItems.observeAsState(emptyList())
-    val selectedDropdownItem by registrarUsuarioViewModel.selectedDropdownItem.observeAsState()
 
-    LaunchedEffect(Unit) {
-        launch {
-            registrarUsuarioViewModel.iniciarTitulo()
-        }
-    }
     LaunchedEffect(registroValido) {
         if (registroValido == true) {
             Toast.makeText(context, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()

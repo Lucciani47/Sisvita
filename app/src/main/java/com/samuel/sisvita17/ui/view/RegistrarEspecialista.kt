@@ -41,6 +41,7 @@ fun RegistrarEspecialista(navController: NavController, registrarUsuarioViewMode
     val confirmarContrasena by registrarUsuarioViewModel.confirmarContrasena.observeAsState("")
     val correoValido by registrarUsuarioViewModel.correoValido.observeAsState(true)
     val ubigeo by registrarUsuarioViewModel.ubigeo.observeAsState("")
+    val colegiatura by registrarUsuarioViewModel.colegiatura.observeAsState("")
     var contrasenaVisible by remember { mutableStateOf(false) }
     var confirmarContrasenaVisible by remember { mutableStateOf(false) }
     val registroValido by registrarUsuarioViewModel.registroValido.observeAsState(false)
@@ -50,14 +51,6 @@ fun RegistrarEspecialista(navController: NavController, registrarUsuarioViewMode
     val selectedRole by registrarUsuarioViewModel.selectedRole.observeAsState(roles[0])
     val context = LocalContext.current
 
-    val dropdownItems by registrarUsuarioViewModel.dropdownItems.observeAsState(emptyList())
-    val selectedDropdownItem by registrarUsuarioViewModel.selectedDropdownItem.observeAsState()
-
-    LaunchedEffect(Unit) {
-        launch {
-            registrarUsuarioViewModel.iniciarTitulo()
-        }
-    }
     LaunchedEffect(registroValido) {
         if (registroValido == true) {
             Toast.makeText(context, "Usuario registrado exitosamente", Toast.LENGTH_SHORT).show()
@@ -177,41 +170,20 @@ fun RegistrarEspecialista(navController: NavController, registrarUsuarioViewMode
                     )
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                var expanded by remember { mutableStateOf(false) }
-
-                ExposedDropdownMenuBox(
-                    expanded = expanded,
-                    onExpandedChange = { expanded = !expanded },
-                    modifier = Modifier
-                ) {
-                    OutlinedTextField(
-                        readOnly = true,
-                        value = selectedDropdownItem?.titulo_name ?: "",
-                        onValueChange = {},
-                        label = { Text("Seleccione su titulo")},
-                        trailingIcon = {
-                            ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded)
-                        },
-                        colors = OutlinedTextFieldDefaults.colors(),
-                        modifier = Modifier
-                            .menuAnchor()
-                            .fillMaxWidth()
+                OutlinedTextField(
+                    value = colegiatura,
+                    onValueChange = { registrarUsuarioViewModel.onColegiaturaChange(it) },
+                    label = { Text("colegiatura") },
+                    placeholder = { Text("Ingrese su colegiatura") },
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = TextFieldDefaults.outlinedTextFieldColors(
+                        focusedBorderColor = MaterialTheme.colorScheme.primary,
+                        unfocusedBorderColor = MaterialTheme.colorScheme.onSurface,
                     )
+                )
 
-                    ExposedDropdownMenu(
-                        expanded = expanded,
-                        onDismissRequest = { expanded = false }) {
-                        dropdownItems.forEach { option: TituloData ->
-                            DropdownMenuItem(
-                                text = { Text(text = option.titulo_name) },
-                                onClick = {
-                                    expanded = false
-                                    registrarUsuarioViewModel.onSelectedDropdownItemChange(option)
-                                }
-                            )
-                        }
-                    }
-                }
+                Spacer(modifier = Modifier.height(8.dp))
                 mensajeResult?.let {
                     if (registroValido == false) {
                         Spacer(modifier = Modifier.height(10.dp))
