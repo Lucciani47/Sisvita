@@ -10,7 +10,6 @@ import androidx.navigation.navArgument
 import com.samuel.sisvita17.ui.view.EvaluarTest
 import com.samuel.sisvita17.ui.view.Home
 import com.samuel.sisvita17.ui.view.Login
-import com.samuel.sisvita17.ui.view.MapaDeCalor
 import com.samuel.sisvita17.ui.view.RealizarTest
 import com.samuel.sisvita17.ui.view.RegistrarEspecialista
 import com.samuel.sisvita17.ui.view.RegistrarEstudiante
@@ -53,9 +52,6 @@ fun AppNavigation(){
         }
         composable(AppScreen.evaluarTest.route){
             EvaluarTest(navController)
-        }
-        composable(AppScreen.mapaDeCarlor.route){
-            MapaDeCalor(navController)
         }
     }
 

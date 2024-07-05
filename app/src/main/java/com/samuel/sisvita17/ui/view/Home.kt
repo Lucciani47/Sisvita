@@ -56,7 +56,7 @@ fun Home(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(color = colorResource(id = R.color.background))
-            .padding(16.dp),
+            .padding(1.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -75,6 +75,9 @@ fun Home(navController: NavController) {
             }
             Button(onClick = {/* TODO: Handle click */ },modifier = Modifier.fillMaxWidth()) {
                 Text("Consultar Resultado")
+            }
+            Button(onClick = {/* TODO: Handle click */ },modifier = Modifier.fillMaxWidth()) {
+                Text("Eliminar Usuario")
             }
             Button(onClick = { /* TODO: Handle click */ },modifier = Modifier.fillMaxWidth()) {
                 Text("Actualizar datos")

@@ -20,6 +20,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -72,8 +74,10 @@ fun RealizarTest(
             .fillMaxSize()
             .background(color = colorResource(id = R.color.background))
     ) {
-        Spacer(modifier = Modifier.height(100.dp))
-        LazyColumn(contentPadding = it) {
+        LazyColumn(modifier = Modifier
+            .fillMaxSize()
+            .background(color = colorResource(id = R.color.background)),
+            contentPadding = it) {
             testResult?.data?.get(0)?.let { testData ->
                 item {
                     Column(
@@ -226,6 +230,44 @@ fun PreguntasItems(
     val selectedOptionId by viewModel.selectedOptions.observeAsState()
 
     Column(modifier = modifier.padding(16.dp)) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondary,
+            )
+        ) {
+            Text(
+                text = preguntas.textopregunta,
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.White,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp),
+            )
+            Column(
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.primary)
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.Start
+            ) {
+                preguntas.opciones.forEach { opcion ->
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        RadioButton(
+                            selected = opcion.opcion_id == selectedOptionId?.get(preguntas.pregunta_id),
+                            onClick = { viewModel.selectOption(preguntas.pregunta_id, opcion.opcion_id) },
+                        )
+                        Text(
+                            text = opcion.nombre,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                    }
+                }
+            }
+        }/*
         Text(text = preguntas.textopregunta, style = MaterialTheme.typography.bodyMedium)
         preguntas.opciones.forEach { opcion ->
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -238,7 +280,7 @@ fun PreguntasItems(
                     modifier = Modifier.padding(start = 8.dp)
                 )
             }
-        }
+        }*/
     }
 }
 

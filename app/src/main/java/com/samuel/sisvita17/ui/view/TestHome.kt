@@ -31,6 +31,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -43,6 +44,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -109,6 +111,85 @@ fun TestItem(
     navController: NavController
 ) {
     var expanded by remember { mutableStateOf(false) }
+    Column(modifier = modifier.padding(16.dp)) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.secondary,
+            )
+        ) {
+            Text(
+                text = test.titulo,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+            Column(
+                modifier = Modifier
+                    .background(MaterialTheme.colorScheme.primary)
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = "Descripcion: " + test.descripcion
+                            + "\nFecha : " + DateUtils.formatDateTime(test.fecha_creacion),
+                    style = MaterialTheme.typography.labelMedium
+                )
+                Button(onClick = {  navController.navigate("realizarTest/"+test.prueba_id.toString())},
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = MaterialTheme.colorScheme.secondary
+                    )) {
+                    Text("Iniciar Test")
+                }
+            }
+        }/*
+        Text(text = preguntas.textopregunta, style = MaterialTheme.typography.bodyMedium)
+        preguntas.opciones.forEach { opcion ->
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                RadioButton(
+                    selected = opcion.opcion_id == selectedOptionId?.get(preguntas.pregunta_id),
+                    onClick = { viewModel.selectOption(preguntas.pregunta_id, opcion.opcion_id) },
+                )
+                Text(
+                    text = opcion.nombre,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+        }*/
+    }/*
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.secondary,
+        )
+    ) {
+        Text(
+            text = test.titulo,
+            style = MaterialTheme.typography.bodyMedium,
+        )
+        Column(
+            modifier = Modifier.padding(
+                start = 16.dp,
+                top = 8.dp,
+                bottom = 16.dp,
+                end = 8.dp
+            )
+        ) {
+
+            Text(
+                text = "Descripcion: " + test.descripcion
+                        + "\nFecha : " + DateUtils.formatDateTime(test.fecha_creacion),
+                style = MaterialTheme.typography.labelMedium
+            )
+        }
+    }*/
+
+    /*
     Card(
         modifier = modifier,
         colors = CardDefaults.cardColors(
@@ -181,6 +262,6 @@ fun TestItem(
                 }
             }
         }
-    }
+    }*/
 
 }
